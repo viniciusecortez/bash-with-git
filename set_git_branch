@@ -1,0 +1,21 @@
+#!/bin/bash
+#by viniciusecortez
+parse_git_branch() {
+     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+}
+export before_PS1=$PS1
+
+if [ -d .git ] && [ -z $(parse_git_branch) ] ; then
+     branch='master'     
+elif [ -d .git ] ; then
+     branch=$(parse_git_branch)
+fi
+
+export PS1="\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[94m\]\w\[\033[95m\] $branch \[\033[00m\]"
+
+if [ $(whoami) == 'root' ] ; then
+     export PS1="$PS1# "
+else
+     export PS1="$PS1$ "
+fi
+

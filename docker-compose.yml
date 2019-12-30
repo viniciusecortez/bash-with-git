@@ -1,0 +1,6 @@
+version: '2'
+
+services: 
+    bash_git:
+        build: .
+        image: viniciusecortez/bash_git

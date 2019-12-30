@@ -1,6 +1,2 @@
 #!/bin/bash
 more set_git_branch >> $HOME/.bashrc
-
-if [ $1 == 'root' ] ; then
-    sudo more set_git_branch >> /root/.bashrc
-fi

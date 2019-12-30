@@ -4,5 +4,5 @@ RUN apt upgrade -y && apt update
 RUN apt install -y git
 ADD . /app
 RUN less /app/${arquivo_executor} >> $HOME/.bashrc
-RUN rm -rf /app
+# RUN rm -rf /app
 CMD bin/bash

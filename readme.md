@@ -20,3 +20,5 @@ Regra | Cor
 Nada a commitar | Verde
 Alterações na stage area(quando você dá o git add ) | Amarelo
 Coisas a commitar sem coisas no stage area | Vermelho
+
+![l](images/exemplos.png)

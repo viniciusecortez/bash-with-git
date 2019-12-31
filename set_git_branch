@@ -9,10 +9,12 @@ git_status(){
 
 export before_PS1=$PS1
 which_branch(){
-     if [ -d .git ] && [ -z $(parse_git_branch) ] ; then
-          echo '!(uncommited)'     
-     elif [ -d .git ] ; then
-          echo $(parse_git_branch)
+     if [ -d .git ] ; then 
+          if [ -z $(parse_git_branch) ] ; then
+               echo '!(no commits)'       
+          else 
+               echo $(parse_git_branch)
+          fi
      fi
 }
 
@@ -24,16 +26,16 @@ color_status(){
      # opcoes
      local untracked=$( git_status | grep Untracked ) 
      local modified=$( git_status | grep modified )
-     local to_be_commited=$(git status | grep "to be committed")
-
-     if [ ! -z "$to_be_commited" ] ; then 
-          echo -e $amarelo
-     elif [ ! -z "$untracked" ] || [ ! -z "$modified" ] ; then
-          echo -e $vermelho
-     else
-          echo -e $verde
+     local to_be_commited=$(git_status | grep "to be committed")
+     if [ -d .git ] ; then
+          if [ ! -z "$to_be_commited" ] ; then 
+               echo -e $amarelo
+          elif [ ! -z "$untracked" ] || [ ! -z "$modified" ] ; then
+               echo -e $vermelho
+          else
+               echo -e $verde
+          fi
      fi
-     
 }
 
 export PS1="\[\033[01;95m\]\u@\h\[\033[00m\]:\[\033[94m\]\w\[\$(color_status)\] \$(which_branch) \[\033[00m\]"

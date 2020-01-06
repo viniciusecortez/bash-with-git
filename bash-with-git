@@ -1,0 +1,44 @@
+#!/bin/bash
+
+github_down(){
+        local user=$1
+        local rep=$2
+        if [ $# -eq 4 ] ; then
+                local branch=$3
+                local arch=$4
+                local last_url=$user/$rep/$branch/$arch
+        elif [ $# -eq 3 ] ; then
+                local arch=$3
+                local last_url=$user/$rep/master/$arch
+        else
+        
+                echo -e "-----------------------"
+                echo -e "   Github User Content   "
+                echo -e "------------------------"
+                echo -e " github_down user rep [ branch ] archieve \n\n"
+
+                echo -e "Default branch is the master"
+        fi
+        if [ $# -gt 0 ] ; then
+                wget https://raw.githubusercontent.com/$last_url
+        fi
+
+}
+
+if [ $# -gt 0 ] ; then 
+    if [ $1 == "uninstall" ] ; then
+        mv ~/.bashrc.old ~/.bashrc
+    elif [ $1 == "install" ] ; then
+        temp=/tmp/BASH_Temp
+        first_pwd=$(pwd)
+        mkdir $temp
+        cd $temp
+        github_down viniciusecortez bash-with-git set_git_branch
+        cp ~/.bashrc ~/.bashrc.old
+        echo -e "\n\n" >> ~/.bashrc
+        more ./set_git_branch >> ~/.bashrc
+        cd $first_pwd
+    fi
+fi
+
+

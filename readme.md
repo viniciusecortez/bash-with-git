@@ -6,12 +6,9 @@ Esse software coloca na configuração do bash uma flag mostrando a branch atual
 
 ## Como se instalar
 
-~~~bash
-git clone https://github.com/viniciusecortez/bash-with-git.git 
-cd bash-with-git
-./install
-cd ..
-rm -rf bash-with-git
+[baixar](https://raw.githubusercontent.com/viniciusecortez/bash_with_git/master/bash_with_git)
+~~~
+./bash-with-git install
 ~~~
 
 ## Exemplos

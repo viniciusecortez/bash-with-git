@@ -22,13 +22,16 @@ color_status(){
      #cores
      local verde="\033[1;32m"
      local vermelho="\033[1;31m"
-     local amarelo="\033[33m"
+     local amarelo="\033[93m"
+     local laranja="033[33m"
      # opcoes
      local untracked=$( git_status | grep Untracked ) 
      local modified=$( git_status | grep modified )
      local to_be_commited=$(git_status | grep "to be committed")
      if [ -d .git ] ; then
-          if [ ! -z "$to_be_commited" ] ; then 
+          if [ ! -z "$to_be_commited" ]  && [ ! -z "$untracked" ] ; then
+               echo -e $laranja
+          elif [ ! -z "$to_be_commited" ] ; then 
                echo -e $amarelo
           elif [ ! -z "$untracked" ] || [ ! -z "$modified" ] ; then
                echo -e $vermelho
